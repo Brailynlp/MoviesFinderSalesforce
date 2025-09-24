@@ -1,0 +1,36 @@
+<template>
+    <lightning-card title="Movie Finder">
+        <div class="search-container">
+            <lightning-input 
+                type="text" 
+                label="Search a movie" 
+                onchange={handleChange}
+                class="search-input">
+            </lightning-input>
+            <lightning-button 
+                label="Search" 
+                onclick={handleSearch} 
+                class="search-button">
+            </lightning-button>
+        </div>
+        <template if:true={movies}>
+            <template for:each={movies} for:item="movie">
+                <div key={movie.imdbID} class="slds-box slds-m-around_x-small slds-grid slds-wrap">
+                    <img src={movie.Poster} alt="Poster"/>
+                    <div class="movie-info">
+                        <p><b>{movie.Title}</b> ({movie.Year})</p>
+                    
+                        <div class="action-row">
+                            <lightning-button 
+                                label="Save" 
+                                onclick={handleSave} 
+                                data-id={movie.imdbID}>
+                            </lightning-button>
+                            <span class="rating">{movie.imdbRating}</span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </lightning-card>
+</template>
